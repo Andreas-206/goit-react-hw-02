@@ -1,6 +1,6 @@
 import Options from '../Options/Options'
 
-const Feedback = ({feedbackTypes}) => {
+const Feedback = ({feedbackTypes, totalFeedback, positivePercentage}) => {
   return (
     <div>
       <ul>
@@ -10,6 +10,8 @@ const Feedback = ({feedbackTypes}) => {
           </li>
         ))}
       </ul>
+      <p>Total: {totalFeedback}</p>
+      <p>Positive: {positivePercentage}%</p>
     </div>
   );
 }

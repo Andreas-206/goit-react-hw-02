@@ -5,13 +5,18 @@ import Options from "./components/Options/Options"
 import Notification from './components/Notification/Notification'
 import './App.css'
 
-const App = () => {
+const App = ({}) => {
+  const initialState = JSON.parse(localStorage.getItem("feedbackTypes")) || {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
 
-const [feedbackTypes, setFeedbackTypes]  = useState({
-	good: 0,
-	neutral: 0,
-	bad: 0
-});
+  const [feedbackTypes, setFeedbackTypes] = useState(initialState);
+
+  useEffect(() => {
+    localStorage.setItem("feedbackTypes", JSON.stringify(feedbackTypes));
+  }, [feedbackTypes]);
 
   const updateFeedback = feedbackType => {
     setFeedbackTypes((prevFeedback) => ({
@@ -22,14 +27,27 @@ const [feedbackTypes, setFeedbackTypes]  = useState({
 
   const totalFeedback = feedbackTypes.good + feedbackTypes.neutral + feedbackTypes.bad;
 
+  const positivePercentage = totalFeedback > 0 ? Math.round(((feedbackTypes.good + feedbackTypes.neutral) / totalFeedback) * 100) : 0;
 
-  return (
+
+   return (
     <>
-    <Description />
-    {totalFeedback > 0 ? (<Feedback feedbackTypes={feedbackTypes} />) : (<Notification message="No feedback yet")}  
-    <Options onLeaveFeedback={updateFeedback} />
+      <Description />
+      <Options onLeaveFeedback={updateFeedback} totalFeedback={totalFeedback} />
+      <Notification />
+      {totalFeedback > 0 ? (
+        <Feedback
+          feedbackTypes={feedbackTypes}
+          totalFeedback={totalFeedback}
+          positivePercentage={positivePercentage}
+        />
+      ) : (
+        null 
+      )}
     </>
   )
 }
+
+
 
 export default App;
