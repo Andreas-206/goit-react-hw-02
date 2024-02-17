@@ -1,7 +1,7 @@
 import css from "./Description.module.css"
 import PropTypes from 'prop-types'
 
-function Description() => {
+const Description = () => {
   return (
 		<div>
 			<h1>Sip Happens Café</h1>
@@ -13,4 +13,4 @@ function Description() => {
 	)
 }
 
-export default function Description
+export default Description

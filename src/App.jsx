@@ -4,7 +4,7 @@ import Feedback from "./components/Feedback/Feedback"
 import Options from "./components/Options/Options"
 import './App.css'
 
-function App() => {
+const App = () => {
 const [feedbackTypes, setFeedbackTypes]  = useState({
 	good: 0,
 	neutral: 0,
@@ -20,4 +20,4 @@ const [feedbackTypes, setFeedbackTypes]  = useState({
   )
 }
 
-export default function App;
+export default App;
