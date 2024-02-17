@@ -11,4 +11,4 @@ const Options = () => {
   )
 }
 
-export default Options
+export default function Options
