@@ -11,7 +11,7 @@ const Feedback = ({feedbackTypes}) => {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 export default Feedback
