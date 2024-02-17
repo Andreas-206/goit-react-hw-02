@@ -1,5 +1,4 @@
 import css from "./Description.module.css"
-import PropTypes from 'prop-types'
 
 const Description = () => {
   return (
