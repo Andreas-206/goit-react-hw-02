@@ -5,7 +5,7 @@ import Options from './components/Options/Options'
 import Notification from './components/Notification/Notification'
 import './App.css'
 
-const App = ({}) => {
+const App = () => {
 	const initialState = JSON.parse(localStorage.getItem('feedbackTypes')) || {
 		good: 0,
 		neutral: 0,
@@ -17,6 +17,11 @@ const App = ({}) => {
 	useEffect(() => {
 		localStorage.setItem('feedbackTypes', JSON.stringify(feedbackTypes))
 	}, [feedbackTypes])
+
+	const handleReset = () => {
+		localStorage.removeItem('feedbackTypes')
+		window.location.reload()
+	}
 
 	const updateFeedback = feedbackType => {
 		setFeedbackTypes(prevFeedback => ({
@@ -31,7 +36,9 @@ const App = ({}) => {
 	const positivePercentage =
 		totalFeedback > 0
 			? Math.round(
-					((feedbackTypes.good + feedbackTypes.neutral) / totalFeedback) * 100) : 0
+					((feedbackTypes.good + feedbackTypes.neutral) / totalFeedback) * 100
+			  )
+			: 0
 
 	return (
 		<>
@@ -40,8 +47,12 @@ const App = ({}) => {
 				content='Please leave your feedback about our service by selecting one of the
 				options below.'
 			/>
-			<Options onLeaveFeedback={updateFeedback} totalFeedback={totalFeedback} />
-			<Notification />
+			<Options
+				onLeaveFeedback={updateFeedback}
+				totalFeedback={totalFeedback}
+				handleReset={handleReset}
+			/>
+			<Notification message='No feedback yet' />
 			{totalFeedback > 0 ? (
 				<Feedback
 					feedbackTypes={feedbackTypes}

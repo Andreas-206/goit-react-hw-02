@@ -1,7 +1,13 @@
-const Notification = () => {
+import PropTypes from "prop-types"
+
+const Notification = ({message}) => {
   return (
-    <p>No feedback yet</p>
+    <p>{message}</p>
   );
 };
+
+Notification.PropTypes = {
+  message: PropTypes.string.isRequired,
+}
 
 export default Notification

@@ -1,8 +1,6 @@
-const Options = ({ onLeaveFeedback, totalFeedback }) => {
-  const handleReset = () => {
-    localStorage.removeItem("feedbackTypes");
-    window.location.reload();
-  };
+import PropTypes from "prop-types"
+
+const Options = ({ onLeaveFeedback, totalFeedback, handleReset }) => {
 
 	return (
 		<div>
@@ -11,7 +9,13 @@ const Options = ({ onLeaveFeedback, totalFeedback }) => {
 			<button onClick={() => onLeaveFeedback('bad')}>Bad</button>
 			{totalFeedback > 0 && <button onClick={handleReset}>Reset</button>}
 		</div>
-	)
+	);
+}
+
+Options.PropTypes = {
+	onLeaveFeedback: PropTypes.func.isRequired,
+	totalFeedback: PropTypes.number.isRequired,
+	handleReset: PropTypes.func.isRequired,
 }
 
 export default Options
